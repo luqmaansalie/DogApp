@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.1.min.js') }}"></script>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Delete</td>
+		</thead>
+
+		{% for row in rows %}
+		<tr>
+			<td>{{row["id"]}}</td>
+			<td>{{row["name"]}}</td>
+			<td><button class="delete">Delete</button></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<a href="/">return</a>
+	
+	<script type="text/javascript">
+		$('.delete').click(function () {
+			var $tr = $(this).parent().parent();
+			var thisid = $tr.find('td:eq(0)').text();
+
+			$.post("{{ url_for('remove') }}", { id: thisid }, function(msg){
+				if (msg == "Record successfully deleted") {
+					$tr.remove()
+				}
+				alert(msg);
+			});
+		});
+	</script>
+
+</body>
+</html>

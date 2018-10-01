@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.1.min.js') }}"></script>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<td>ID</td>
+			<td>Name</td>
+			<td>New name</td>
+			<td>Update</td>
+		</thead>
+
+		{% for row in rows %}
+		<tr>
+			<td>{{row["id"]}}</td>
+			<td>{{row["name"]}}</td>
+			<td><input type="text" maxlength="20"/></td>
+			<td><button class="update">Update</button></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<a href="/">return</a>
+	
+	<script type="text/javascript">
+		$('.update').click(function () {
+			var $tr = $(this).parent().parent();
+			var thisid = $tr.find('td:eq(0)').text();
+			var thisname = $tr.find('td:eq(1)').text();
+			var newname = $tr.find('input').val();
+
+			if (newname == "" || newname == thisname) {
+				alert("please enter a new name");
+			} else {
+				$.post("{{ url_for('upd') }}", { id: thisid, name: newname }, function(msg){
+					if (msg == "Record successfully updated") {
+						$tr.find('td:eq(1)').text(newname);
+						$tr.find('input').val('');
+					}
+					alert(msg);
+				});
+			}
+		});
+	</script>
+
+</body>
+</html>

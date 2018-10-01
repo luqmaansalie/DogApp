@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<script type='text/javascript' src="{{ url_for('static', filename='jquery-1.11.1.min.js') }}"></script>
+</head>
+<body>
+	<div>ID</div><input type="number" min="1" id="id" />
+	<div>Name</div><input type="text" maxlength="20" id="name" />
+	<button class="create">Create</button>
+	<br/>
+	<a href="/">return</a>
+	
+	<script type="text/javascript">
+		$('.create').click(function () {
+			var thisid = $('#id').val();
+			var thisname = $('#name').val();
+
+			if (thisid == "" || thisname == "") {
+				alert("please enter a name and id");
+			} else {
+				$.post("{{ url_for('insert') }}", { id: thisid, name: thisname }, function(msg){
+					alert(msg);
+				});
+			}
+		});
+	</script>
+
+</body>
+
+</html>

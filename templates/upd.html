@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<body>
+	<form action="{{ url_for('doupdate') }}" method="POST">
+		{% for row in rows %}
+		ID
+		<input type="text" name="id" value='{{row["id"]}}' />
+		Name
+		<input type="text" name="name" value='{{row["name"]}}'/>
+		<input type="submit" value="submit" /><br>
+		{% endfor %}
+	</form>
+
+</body>
+
+</html>

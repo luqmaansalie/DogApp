@@ -6,6 +6,8 @@ Clone the repository, open a command prompt, navigate to the folder and execute 
 py app.py
 
 
+Did not complete Task 4 due to time constraints. I would have done it with a config file, read the parameters in the file, and apply them to the environment.
+
 Task 1: Create a Dog Application
 
 1. Create a structured project containing a flask-restful webservice application
